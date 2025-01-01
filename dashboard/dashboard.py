@@ -462,12 +462,12 @@ def ploty_bar_visualization(data, id_vars, labels, parameters, title_template="A
 
 def ploty_geospatial_visualization(filtered_df, selected_filters, parameter):
     """
-    Generates a geospatial visualization (scatter plot on a map) based on the given DataFrame 
-    and selected filters. The plot displays pollutant data based on the selected year, month, 
+    Generates a geospatial visualization (scatter plot on a map) based on the given DataFrame
+    and selected filters. The plot displays pollutant data based on the selected year, month,
     day, and hour, with additional data about the stations.
 
     The function filters the DataFrame based on the selected filters (year, month, day, hour),
-    groups the data by the relevant columns, and visualizes it using Plotly's scatter_mapbox 
+    groups the data by the relevant columns, and visualizes it using Plotly's scatter_mapbox
     function.
 
     Parameters:
@@ -477,7 +477,7 @@ def ploty_geospatial_visualization(filtered_df, selected_filters, parameter):
     - parameter (list): A list containing the column name of the pollutant (e.g., ["PM2.5"]).
 
     Returns:
-    - fig (plotly.graph_objs.Figure): The Plotly figure object containing the geospatial 
+    - fig (plotly.graph_objs.Figure): The Plotly figure object containing the geospatial
       visualization.
     """
 
@@ -486,6 +486,8 @@ def ploty_geospatial_visualization(filtered_df, selected_filters, parameter):
 
     # Define Group Column and Hover for Visualization
     group_cols = ["station", "latitude", "longitude"]
+    hover_cols = [parameter[0]]
+
     if selected_hour is not None:
         filtered_df["hour"] = filtered_df["datetime"].dt.hour
         group_cols = ["hour"] + group_cols
@@ -502,7 +504,11 @@ def ploty_geospatial_visualization(filtered_df, selected_filters, parameter):
         filtered_df["year"] = filtered_df["datetime"].dt.year
         group_cols = ["year"] + group_cols
         hover_cols = ["year", parameter[0]]
-    
+
+    # Handle missing columns or no filters applied
+    if len(group_cols) == 3:
+        hover_cols = [parameter[0]]
+
     # Sort the Filter Dataframe
     filtered_df = (
         filtered_df.groupby(group_cols)
