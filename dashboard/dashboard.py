@@ -593,12 +593,19 @@ with st.sidebar:
   min_date = final_df["datetime"].min()
   max_date = final_df["datetime"].max()
 
-  start_date, end_date = st.date_input(
+  selected_dates = st.date_input(
       label="Rentang Waktu",
       min_value=min_date,
       max_value=max_date,
       value=[min_date, max_date]
   )
+
+  # If only one date is selected, set start_date and end_date to the same date
+  if len(selected_dates) == 1:
+      start_date = selected_dates[0]
+      end_date = selected_dates[0]
+  else:
+      start_date, end_date = selected_dates
 
 # Define dataframe filter
 main_df = p_polution_final_df[(p_polution_final_df["date"] >= start_date) & (p_polution_final_df["date"] <= end_date)]
