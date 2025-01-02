@@ -7,9 +7,8 @@ You can access the dataset here: [Air Quality Dataset](https://github.com/marcel
 ## **How to Run It?**
 You can run this project using two methods. Before starting, make sure to download or clone this repository to access all required files.
 ```
-$git clone <repository_url>
+$git clone https://github.com/NgakanWidyasprana/data-analyst-aqi.git
 ```
-Replace `<repository_url>` with the URL of the repository.
 
 ### **Method 1: Run Locally**
 1. **Install Streamlit**
