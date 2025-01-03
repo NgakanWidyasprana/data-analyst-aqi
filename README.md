@@ -29,7 +29,7 @@ $git clone https://github.com/NgakanWidyasprana/data-analyst-aqi.git
     Use the following command to run the Streamlit applications:
 
     ```
-    streamlit run dashboard.py
+    streamlit run dashboard/dashboard.py
     ```
 
 ### **Method 2: Run with Ngrok**
